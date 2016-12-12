@@ -1,4 +1,7 @@
 <?php  
+        require('../Model/Produit.php');
+        require('../Model/LigneCommande.php');
+        require('../Model/Panier.php');
         session_start();
         if(isset($_SESSION['id'])) {
 
@@ -15,8 +18,13 @@
         afficheEntete(1);
         afficheMenu(1);
         afficheBodyCatalogue($donnees);
-
-        //afficherPagination($nbPage);
+        if(isset($_SESSION['panier'])){
+            foreach ($_SESSION['panier']->getLigneDeCommande() as $value) {
+                echo $value->getProduit()->getLibelleProduit().'<br />';
+                echo $value->getQuantite().'<br />';
+            }
+            
+         }
         afficheFooter($pages);           
         }
         else
