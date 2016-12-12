@@ -19,15 +19,22 @@ function afficheMenu($niveau) {
             
             <div class="navbar-collapse collapse in navbar-right" aria-expanded="false" id="navbar">
                 <ul class="nav navbar-nav">
+                    <?php if (!isset($_SESSION['id'])) { ?>
                     <li>
-                        <a href="#">Commander</a>
+                        <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>identification.php">Catalogue</a>
                     </li>
+                    <?php }else {?>
+                      <li>
+                            <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>catalogue.php">Catalogue</a>
+                        </li>
+                      <?php  }?>
+                    
                     <li>
                         <a href="#">Panier</a>
                     </li>
                     <?php if (!isset($_SESSION['id'])) { ?>
                     <li>
-                        <a href="#">Login</a>
+                        <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>identification.php">Login</a>
                     </li>
                     <?php } ?>
                     <?php if (isset($_SESSION['id'])) { ?>

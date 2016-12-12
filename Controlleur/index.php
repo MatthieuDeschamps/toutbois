@@ -1,11 +1,14 @@
 <?php 
+   
 require('../Vue/Head.php');
-//require('Menu.php');
-require('../Vue/Login.php');
+require('../Vue/Menu.php');
+require('../Vue/BodyAcceuil.php');
 require('../Vue/Footer.php');
 
 afficheEntete(1);
-//afficheMenu();
-afficheLogin();
+afficheMenu(0);
+afficheBodyAcceuil();
 afficheFooter(1);
+
 ?>
+
