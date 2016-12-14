@@ -17,6 +17,22 @@ class Panier {
         }
         return $total;
     }
+    
+    public function totalCommandeHT(){
+       $total=0; 
+        foreach ($this->getLigneDeCommande() as $value) {
+            $total+=$value->calculerPrixHT();
+        }
+        return $total;
+    }
+    
+    public function totalTVA(){
+       $total=0; 
+        foreach ($this->getLigneDeCommande() as $value) {
+            $total+=$value->calculerTVA();
+        }
+        return $total;
+    }
 }
 ?>
 

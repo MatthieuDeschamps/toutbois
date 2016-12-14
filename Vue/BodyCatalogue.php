@@ -10,9 +10,9 @@ function afficheBodyCatalogue($donnees) {
                 <div class="col-md-3">
                     <h3 class="lead">Catégorie</h3>
                     <div class="list-group">
-                        <a href="#" class="list-group-item">Assise</a>
-                        <a href="#" class="list-group-item">Table</a>
-                        <a href="#" class="list-group-item">Rangement</a>
+                        <a href="../Controlleur/catalogue.php?Id_typeProduit=1" class="list-group-item">Assise</a>
+                        <a href="../Controlleur/catalogue.php?Id_typeProduit=3" class="list-group-item">Table</a>
+                        <a href="../Controlleur/catalogue.php?Id_typeProduit=2" class="list-group-item">Rangement</a>
                     </div>
                 </div>
                 
@@ -40,7 +40,7 @@ function afficheBodyCatalogue($donnees) {
                                         </div>
                                         <div class="col-sm-3 col-lg-3 col-md-3">
                                             <div class="row">
-                                                <h2 class="paraCatalogue"><?php echo $donnee['prixUnitaireProduit'] ?> €</h2>
+                                                <h2 class="paraCatalogue"><?php echo number_format($donnee['prixUnitaireProduit'] ,2, ',', ' ') ?> €</h2>
                                             </div>
                                             <div class="row">
                                                 <p class="paraCatalogue">hors tva</p>

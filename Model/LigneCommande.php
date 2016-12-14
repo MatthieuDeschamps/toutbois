@@ -15,6 +15,7 @@ class LigneCommande {
 
     private $produit;
     private $quantite;
+    
 
     public function getProduit() {
         return $this->produit;
@@ -34,6 +35,14 @@ class LigneCommande {
 
     public function calculerPrixTTC() {
         return $this->getProduit()->getPrixProduit()*$this->getQuantite()*(1+($this->produit->getTVAProduit())/100);
+    }
+    
+    public function calculerPrixHT() {
+        return $this->getProduit()->getPrixProduit()*$this->getQuantite();
+    }
+    
+    public function calculerTVA() {
+        return $this->getProduit()->getTVAProduit()*$this->getQuantite()*$this->getProduit()->getPrixProduit()/100;
     }
 
 }

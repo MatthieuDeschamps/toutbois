@@ -84,14 +84,15 @@ class ToutboisDAO{
     public static function get_produitByType($type)
     {
         $bdd = ToutboisDAO::connectionBDDToutbois();
-        $statement=$bdd->prepare("SELECT prod.codeProduit, prod.libelleProduit, prod.stockProduit, prod.prixUnitaireProduit, prod.remiseProduit, prod.remiseProduit, prod.description, prod.image, tva.tauxTVA, tp.libelleTypeProduit, prod.id_TVA, prod.Id_typeProduit 
-        FROM produit as prod 
-        INNER JOIN tva on prod.id_TVA = tva.id_TVA 
-        INNER JOIN type_produit as tp on prod.Id_typeProduit = tp.Id_typeProduit
-        WHERE prod.Id_typeProduit = ".$type);
+        $statement=$bdd->prepare("SELECT codeProduit, libelleProduit, 
+            stockProduit, prixUnitaireProduit, remiseProduit, 
+            remiseProduit, description, Image, 
+            Id_typeProduit 
+        FROM produit 
+        WHERE Id_typeProduit = ".$type);
         $statement->execute();
         
-        $donnees = $statement->fetch();
+        $donnees = $statement->fetchAll();
         
         ToutboisDAO::deconnectionBDD($bdd);
         return $donnees;
@@ -119,6 +120,20 @@ class ToutboisDAO{
         
         ToutboisDAO::deconnectionBDD($bdd);
         return $donnees;
+    }
+    
+    public static function getNombrePageParTypeProduit($idType)
+    {
+        $bdd = ToutboisDAO::connectionBDDToutbois();
+        $statement=$bdd->prepare("SELECT COUNT(*) FROM produit WHERE Id_typeProduit = ".$idType);
+        $statement->execute();
+        
+        $resultatRequete = $statement->fetch();
+        $nbPage = ceil($resultatRequete[0] / 6);
+        
+        ToutboisDAO::deconnectionBDD($bdd);
+        
+        return $nbPage;
     }
     
     public static function getNombrePage()
@@ -217,19 +232,17 @@ class ToutboisDAO{
 
     public static function affichageProduit($position,$objetParPage)
     {
-        $bdd = ToutboisDAO::connectionBDDToutbois();
-        
-        $statement=$bdd->prepare('SELECT codeProduit, libelleProduit, stockProduit, prixUnitaireProduit, remiseProduit, description,Image FROM produit LIMIT '.$position.', '.$objetParPage);
-        
-        $statement->execute();
-        
-        $donnees = $statement->fetchAll();
-        
-        ToutboisDAO::deconnectionBDD($bdd);
-        
-        return $donnees;
-        
+        $bdd = ToutboisDAO::connectionBDDToutbois();        
+        $statement=$bdd->prepare('SELECT codeProduit, libelleProduit, stockProduit, '
+                . 'prixUnitaireProduit, remiseProduit, description,Image '
+                . 'FROM produit LIMIT '.$position.', '.$objetParPage);        
+        $statement->execute();        
+        $donnees = $statement->fetchAll();        
+        ToutboisDAO::deconnectionBDD($bdd);        
+        return $donnees;        
     }
+    
+    
 }
 
 ?>
