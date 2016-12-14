@@ -15,8 +15,7 @@ function afficheBodyCatalogue($donnees) {
                         <a href="#" class="list-group-item">Rangement</a>
                     </div>
                 </div>
-                <!-- Grille article-->
-                <!--Chargement produit avec DAO-->
+                
 
                 <div class="col-md-9 " >
                     <?php

@@ -14,7 +14,8 @@
 
         $donnees = ToutboisDAO::get_produit();
         $pages= ToutboisDAO::getNombrePage();
-            
+        
+        
         afficheEntete(1);
         afficheMenu(1);
         afficheBodyCatalogue($donnees);

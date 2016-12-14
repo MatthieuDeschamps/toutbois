@@ -21,13 +21,19 @@ function afficheMenu($niveau) {
                 <ul class="nav navbar-nav">
                     <?php if (!isset($_SESSION['id'])) { ?>
                     <li>
-                        <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>identification.php">Catalogue</a>
+                        <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>identification.php">Commander</a>
                     </li>
                     <?php }else {?>
                       <li>
-                            <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>catalogue.php">Catalogue</a>
+                            <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>catalogue.php">Commander</a>
                         </li>
                       <?php  }?>
+                        
+                    <?php if (!isset($_SESSION['id'])){?>
+                        <li>
+                           <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>identification.php">Commandes en cours</a>                         
+                        </li>
+                    <?php  }?>                  
                     <?php if (isset($_SESSION['id'])) { ?>
                     <li>
                         <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>panier.php">Panier</a>

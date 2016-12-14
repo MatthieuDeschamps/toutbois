@@ -1,7 +1,6 @@
 <?php
-
 function afficheBodyPanier() {
-    ?>
+?>
     <section id = "bodyPanier">
         <div class="container panier">
             <div class="row">
