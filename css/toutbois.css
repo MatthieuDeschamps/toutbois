@@ -35,6 +35,7 @@ body
 
 footer {
     display: block;
+    padding-top: 50px;
 }
 
 p {
@@ -104,6 +105,10 @@ p {
     
     
 }
-
-
+/*********************************************
+			Box prix global
+*********************************************/
+p .paraCatalogue{
+    font-weight: bold;
+}
 

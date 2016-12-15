@@ -33,6 +33,35 @@ class Panier {
         }
         return $total;
     }
+    public function del($idProduit){
+        $nbre=count($this->getLigneDeCommande());
+        for($i=0;$i<$nbre;$i++){
+            
+            echo $idProduit;
+            echo $this->getLigneDeCommande()[$i]->getProduit()->getCodeProduit();
+            if($this->getLigneDeCommande()[$i]->getProduit()->getCodeProduit() == $idProduit ){
+                
+                print_r($_SESSION['panier']->getLigneDeCommande()[$i]);
+                $this->getLigneDeCommande()[$i]->bombeAtomique();
+                
+                
+            }
+        }
+        /*foreach ($this->getLigneDeCommande() as $value) {
+            echo 'Salut lees petits';
+          
+            
+            if($value->getProduit()->getCodeProduit() == $idProduit ){
+               
+               $value=NULL;
+                var_dump($value);
+            }
+            
+        }*/
+    }
+    
+    
+    
 }
 ?>
 

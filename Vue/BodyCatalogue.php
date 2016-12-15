@@ -15,7 +15,7 @@ function afficheBodyCatalogue($donnees) {
                         <a href="../Controlleur/catalogue.php?Id_typeProduit=2" class="list-group-item">Rangement</a>
                     </div>
                 </div>
-                
+
 
                 <div class="col-md-9 " >
                     <?php
@@ -40,11 +40,22 @@ function afficheBodyCatalogue($donnees) {
                                         </div>
                                         <div class="col-sm-3 col-lg-3 col-md-3">
                                             <div class="row">
-                                                <h2 class="paraCatalogue"><?php echo number_format($donnee['prixUnitaireProduit'] ,2, ',', ' ') ?> €</h2>
+                                                <h2 class="paraCatalogue"><?php echo number_format($donnee['prixUnitaireProduit'], 2, ',', ' ') ?> €</h2>
                                             </div>
                                             <div class="row">
                                                 <p class="paraCatalogue">hors tva</p>
                                             </div>
+
+                                            <div class="row">
+                                                <p class="paraCatalogue">
+                                                    <?php if ($donnee['remiseProduit'] != 0) { ?>
+                                                        Remise <?php echo ($donnee['remiseProduit']) ?> %
+                                                    <?php } else { ?>
+                                                        Pas de remise    
+                                                    <?php } ?></p>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                     <div class="row">

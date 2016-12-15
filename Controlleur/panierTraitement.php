@@ -36,21 +36,20 @@ if (isset($_SESSION['id'])) {
         $_SESSION['panier'] = new Panier();
     }
 
-    foreach ($_SESSION['panier']->getLigneDeCommande() as $value) {
-        
-
+    foreach ($_SESSION['panier']->getLigneDeCommande() as $value) {        
+        // pour ajouter la quantité à un produit existant
         if ($produitLigneCommande->getCodeProduit() === $value->getProduit()->getCodeProduit()) {
             
             $value->setQuantite($value->getQuantite()+$ligneCommande->getQuantite());
             $produitDejaLigneCommande=true;
-            
+        
         }
     }
 
-
-        if(!isset($produitDejaLigneCommande)){
-        $_SESSION['panier']->setLigneDeCommande($ligneCommande);
-        }
+    // ajout du produit dans le panier si pas existant
+    if(!isset($produitDejaLigneCommande)){
+    $_SESSION['panier']->setLigneDeCommande($ligneCommande);
+    }
 
     header("location:../Controlleur/catalogue.php");
 } else {

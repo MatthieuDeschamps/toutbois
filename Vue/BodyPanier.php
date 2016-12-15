@@ -3,6 +3,10 @@
 function afficheBodyPanier() {
     ?>
     <?php if (isset($_SESSION['panier'])) { ?>
+    <?php if(isset($_GET['del'])){
+       $_SESSION['panier']->del($_GET['del']);
+        //echo 'salut'.$_GET['del'];
+    }?>
         <section id = "bodyPanier">
             <div class="container panier">
                 <div class="row">
@@ -27,29 +31,45 @@ function afficheBodyPanier() {
 
                             <?php
                             foreach ($_SESSION['panier']->getLigneDeCommande() as $product):
+                                
                                 ?>
                                 <tbody>
                                     <tr text-align="center">
                                         <th><?= $product->getProduit()->getLibelleProduit(); ?></th>
                                         <th><img src="<?= '../' . $product->getProduit()->getLienImageProduit(); ?>" class="img-responsive img-panier"></th>
                                         <th><?= number_format($product->getProduit()->getPrixProduit(), 2, ',', ' '); ?> €</th>                                                                   
-                                        <th><input type="number" name="panier[quantity][<?= $product->getQuantite(); ?>]" value="<?= $product->getQuantite(); ?>"></th>
-                                        <th><?= number_format($product->calculerPrixTTC(), 2, ',', ' '); ?> €</th>
-                                        <th>
-                                            <a href="panier.php?delPanier=<?= $product->getProduit()->getCodeProduit(); ?>" class="del"><th class="glyphicon glyphicon-trash" aria-hidden="true"></th></a>
-                                        </th>
+                                        <th> 
+                                <form method="post" action="../Controlleur/panierTraitement.php">
+                                    <input type="number" name="panier[quantity][<?= $product->getQuantite(); ?>]" value="<?= $product->getQuantite(); ?>">
+                                </form></th>
+                                    <th><?= number_format($product->calculerPrixTTC(), 2, ',', ' '); ?> €</th>
+                                    <th>                                        
+                                        <a href="../Controlleur/panier.php?del= <?= $product->getProduit()->getCodeProduit(); ?>" class="btn btn-danger glyphicon glyphicon-trash" aria-label="Panier" aria-hidden="true"></a>
+                                                                    
+
+                                        <!--<button  type="submit" class="btn btn-danger" aria-label="Panier"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                        -->
+                                        <button type="submit" class="btn btn-success" aria-label="Panier"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </th>
                                     </tr>
-                                </tbody>
-                            <?php endforeach; ?>
+                                    </tbody>
+                                <?php endforeach; ?>
                         </table>
                     </form>
                 </div>
             </div>
         </section>
-
+        
         <section id = "totalPanier">
             <div class="container">
                 <div class="row">
+                    <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <input type="submit" class="btn btn-info " value="Calculer">
+                        <input type="submit" class="btn btn-success " value=" Valider ">
+                    </div>
+                </div>
+
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <h3>Total commande HT: </h3>
                         <h4>Total TVA: </h4>
@@ -65,13 +85,11 @@ function afficheBodyPanier() {
 
 
                 </div>
+
                 
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <input type="submit" class="btn btn-info" value="Recalculer">
-                        <input type="submit" class="btn btn-success" value="Valider">
-                    </div>
-                </div>
+
+
+
             </div>
         </section>
 

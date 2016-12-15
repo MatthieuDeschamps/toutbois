@@ -44,5 +44,8 @@ class LigneCommande {
     public function calculerTVA() {
         return $this->getProduit()->getTVAProduit()*$this->getQuantite()*$this->getProduit()->getPrixProduit()/100;
     }
-
+    
+    public function bombeAtomique() {
+        unset($this);
+    }
 }

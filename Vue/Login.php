@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-lg-12 col-md-12">
-            <img src="../img/logo/logo-01.png" class="img-responsive img-responsive-margin" alt="Logo ToutBois">
+            <img src="../img/logo/logo-02.png" class="img-responsive img-responsive-margin" alt="Logo ToutBois">
         </div>
     </div>        
     <div class="row">
