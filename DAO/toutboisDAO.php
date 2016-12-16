@@ -31,6 +31,23 @@ class ToutboisDAO{
         
     }
     
+    
+    public static function commandeEnCours()
+    {
+        $bdd = ToutboisDAO::connectionBDDToutbois();
+        $statement=$bdd->prepare("SELECT prod.codeProduit, prod.libelleProduit, prod.stockProduit, prod.prixUnitaireProduit, prod.remiseProduit, prod.remiseProduit, prod.description, prod.image, tva.tauxTVA, tp.libelleTypeProduit, prod.id_TVA, prod.Id_typeProduit 
+        FROM produit as prod 
+        INNER JOIN tva on prod.id_TVA = tva.id_TVA 
+        INNER JOIN type_produit as tp on prod.Id_typeProduit = tp.Id_typeProduit
+        WHERE prod.codeProduit = ".$id);
+        $statement->execute();
+        
+        $donnees = $statement->fetch();
+        
+        ToutboisDAO::deconnectionBDD($bdd);
+        return $donnees;
+        
+    }
     public static function identificationMembre($login,$mdp)
     {
         $bdd = ToutboisDAO::connectionBDDToutbois();

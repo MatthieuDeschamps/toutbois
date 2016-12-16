@@ -31,7 +31,7 @@ function afficheMenu($niveau) {
                         
                     <?php if (isset($_SESSION['id'])){?>
                         <li>
-                           <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>panier.php">Commandes en cours</a>                         
+                           <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>commandeEnCours.php">Commandes en cours</a>                         
                         </li>
                     <?php  }?>                  
                     <?php if (isset($_SESSION['id'])) { ?>
