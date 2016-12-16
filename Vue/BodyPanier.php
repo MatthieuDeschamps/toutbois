@@ -4,8 +4,8 @@ function afficheBodyPanier() {
     ?>
     <?php if (isset($_SESSION['panier'])) { ?>
     <?php if(isset($_GET['del'])){
-       $_SESSION['panier']->del($_GET['del']);
-        //echo 'salut'.$_GET['del'];
+       $tableau=$_SESSION['panier']->suppressionLigneDeCommande($_GET['del'],$_SESSION['panier']->getLigneDeCommande());
+       $_SESSION['panier']->setLigneDeCommande($tableau);
     }?>
         <section id = "bodyPanier">
             <div class="container panier">
@@ -44,7 +44,7 @@ function afficheBodyPanier() {
                                 </form></th>
                                     <th><?= number_format($product->calculerPrixTTC(), 2, ',', ' '); ?> €</th>
                                     <th>                                        
-                                        <a href="../Controlleur/panier.php?del= <?= $product->getProduit()->getCodeProduit(); ?>" class="btn btn-danger glyphicon glyphicon-trash" aria-label="Panier" aria-hidden="true"></a>
+                                        <a href="../Controlleur/panier.php?del=<?= $product->getProduit()->getCodeProduit(); ?>" class="btn btn-danger glyphicon glyphicon-trash" aria-label="Panier" aria-hidden="true"></a>
                                                                     
 
                                         <!--<button  type="submit" class="btn btn-danger" aria-label="Panier"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>

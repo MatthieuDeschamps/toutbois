@@ -7,6 +7,10 @@ class Panier {
     }
 
     public function setLigneDeCommande($ligneDeCommande) {
+        $this->ligneDeCommande = $ligneDeCommande;
+    }
+    
+    public function ajoutLigneDeCommande($ligneDeCommande) {
         array_push($this->ligneDeCommande, $ligneDeCommande);
     }
 
@@ -33,31 +37,18 @@ class Panier {
         }
         return $total;
     }
-    public function del($idProduit){
-        $nbre=count($this->getLigneDeCommande());
+    public static function suppressionLigneDeCommande($idProduit,$lignedecommande){
+        $nbre=count($lignedecommande);
         for($i=0;$i<$nbre;$i++){
             
-            echo $idProduit;
-            echo $this->getLigneDeCommande()[$i]->getProduit()->getCodeProduit();
-            if($this->getLigneDeCommande()[$i]->getProduit()->getCodeProduit() == $idProduit ){
-                
-                print_r($_SESSION['panier']->getLigneDeCommande()[$i]);
-                $this->getLigneDeCommande()[$i]->bombeAtomique();
-                
-                
+            if($lignedecommande[$i]->getProduit()->getCodeProduit() == $idProduit ){
+              
+                unset($lignedecommande[$i]);    
             }
         }
-        /*foreach ($this->getLigneDeCommande() as $value) {
-            echo 'Salut lees petits';
-          
-            
-            if($value->getProduit()->getCodeProduit() == $idProduit ){
-               
-               $value=NULL;
-                var_dump($value);
-            }
-            
-        }*/
+        $lignedecommandeReindexe=array_values($lignedecommande);
+        return $lignedecommandeReindexe;
+       
     }
     
     

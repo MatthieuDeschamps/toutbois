@@ -48,7 +48,7 @@ if (isset($_SESSION['id'])) {
 
     // ajout du produit dans le panier si pas existant
     if(!isset($produitDejaLigneCommande)){
-    $_SESSION['panier']->setLigneDeCommande($ligneCommande);
+    $_SESSION['panier']->ajoutLigneDeCommande($ligneCommande);
     }
 
     header("location:../Controlleur/catalogue.php");
