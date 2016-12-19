@@ -1,12 +1,9 @@
 <?php
 
-function afficheBodyCommande() {
+function afficheBodyCommande($listeCommande) {
     ?>
-    <?php if (isset($_SESSION['panier'])) { ?>
-    <?php if(isset($_GET['del'])){
-       $_SESSION['panier']->del($_GET['del']);
-        //echo 'salut'.$_GET['del'];
-    }?>
+    <?php if (isset($listeCommande)) { ?>
+    
         <section id = "bodyPanier">
             <div class="container panier">
                 <div class="row">
@@ -19,38 +16,26 @@ function afficheBodyCommande() {
                         <table class="table">
                             <thead>
                                 <tr text-align="center">
-                                    <th>Libellé Produit</th>
-                                    <th>Image Produit</th>
-                                    <th>Prix</th>
-                                    <th>Quantité</th>
-                                    <th>Prix avec TVA</th>
-                                    <th>Actions</th>
-
+                                    <th>Réference commande</th>
+                                    <th>Date de la commande</th>
+                                    <th>Date livraison commande</th>
+                                    <th>Etat commande</th>
+                                    <th>Prix commande HT</th>
                                 </tr>
                             </thead>
 
                             <?php
-                            foreach ($_SESSION['panier']->getLigneDeCommande() as $product):
+                            foreach ($listeCommande as $product):
                                 
                                 ?>
                                 <tbody>
                                     <tr text-align="center">
-                                        <th><?= $product->getProduit()->getLibelleProduit(); ?></th>
-                                        <th><img src="<?= '../' . $product->getProduit()->getLienImageProduit(); ?>" class="img-responsive img-panier"></th>
-                                        <th><?= number_format($product->getProduit()->getPrixProduit(), 2, ',', ' '); ?> €</th>                                                                   
-                                        <th> 
-                                <form method="post" action="../Controlleur/panierTraitement.php">
-                                    <input type="number" name="panier[quantity][<?= $product->getQuantite(); ?>]" value="<?= $product->getQuantite(); ?>">
-                                </form></th>
-                                    <th><?= number_format($product->calculerPrixTTC(), 2, ',', ' '); ?> €</th>
-                                    <th>                                        
-                                        <a href="../Controlleur/panier.php?del= <?= $product->getProduit()->getCodeProduit(); ?>" class="btn btn-danger glyphicon glyphicon-trash" aria-label="Panier" aria-hidden="true"></a>
-                                                                    
-
-                                        <!--<button  type="submit" class="btn btn-danger" aria-label="Panier"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                                        -->
-                                        <button type="submit" class="btn btn-success" aria-label="Panier"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </th>
+                                        <th> Commande numéro <?= $product['numero commande']; ?></th>
+                                        <th><?= $product['dateCommande']; ?></th>
+                                        <th><?= $product['dateLivraisonCommande']; ?></th>                                                                   
+                                        <th><?= $product['libelle_EtatCommande']; ?></th>
+                                        <th><?= $product['total']; ?>€</th>
+                                    
                                     </tr>
                                     </tbody>
                                 <?php endforeach; ?>
@@ -60,32 +45,17 @@ function afficheBodyCommande() {
             </div>
         </section>
         
-        <section id = "totalPanier">
+        <section id = "commande">
             <div class="container">
-                <div class="row">
+                
                     <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <input type="submit" class="btn btn-info " value="Calculer">
-                        <input type="submit" class="btn btn-success " value=" Valider ">
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                        <a href="../Controlleur/catalogue.php" class="btn btn-danger glyphicon glyphicon-menu-left"  aria-label="Panier" aria-hidden="true"> Retour</a>
+                       
                     </div>
                 </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <h3>Total commande HT: </h3>
-                        <h4>Total TVA: </h4>
-                        <h4>Total commande TTC: </h4>
-
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 text-right">
-                        <h3><?= number_format($_SESSION['panier']->totalCommandeHT(), 2, ',', ' '); ?> €  </h3>
-                        <h4><?= number_format($_SESSION['panier']->totalTVA(), 2, ',', ' '); ?> €  </h4>
-                        <h4><?= number_format($_SESSION['panier']->totalCommandeTTC(), 2, ',', ' '); ?> €  </h4>
-                    </div>
-
-
-                </div>
-
+                   
                 
 
 

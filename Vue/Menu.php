@@ -36,6 +36,7 @@ function afficheMenu($niveau) {
                     <?php  }?>                  
                     <?php if (isset($_SESSION['id'])) { ?>
                     <li>
+                        
                         <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>panier.php">Panier</a>
                     </li>
                     <?php } ?>
@@ -46,7 +47,7 @@ function afficheMenu($niveau) {
                     <?php } ?>
                     <?php if (isset($_SESSION['id'])) { ?>
                     <li>
-                        <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>deconnexion.php">Déconnexion</a>
+                        <a href="<?php for($i=0;$i<$niveau-1;$i++){echo '../';} ?>deconnexion.php" class="glyphicon glyphicon-log-out"></a>
                     </li>
                     <?php } ?>
                     <?php if (isset($_SESSION['admin']) && $_SESSION['admin']===1) { ?>

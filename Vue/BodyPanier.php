@@ -97,7 +97,7 @@ function afficheBodyPanier() {
         <div class="container">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="row text-center">
-                    <h3> PAS DE COMMANDE EN COURS</h3>
+                    <h3> PAS DE PRODUIT DANS LE PANIER </h3>
                     <img src="../img/logo/caddyVide.png" alt="Panier vide">
                 </div>
             </div>
