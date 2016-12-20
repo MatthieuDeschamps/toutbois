@@ -10,7 +10,6 @@
             for ($i=0;$i<count($_SESSION['panier']->getLigneDeCommande());$i++){
                 
                 $quantite=$_POST[$_SESSION['panier']->getLigneDeCommande()[$i]->getProduit()->getCodeProduit()];
-                echo $quantite;
                 $_SESSION['panier']->getLigneDeCommande()[$i]->setQuantite($quantite);
             }
             

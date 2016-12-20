@@ -1,12 +1,22 @@
-<?php 
-require('../Vue/Head.php');
-require('../Vue/Menu.php');
-require('../Vue/Login.php');
-require('../Vue/Footer.php');
+<?php  
+        require('../Model/Produit.php');
+        require('../Model/LigneCommande.php');
+        require('../Model/Panier.php');
+        session_start();
+        require('../DAO/toutboisDAO.php');
+        
+        if(isset($_SESSION['id'])) {
 
-afficheEntete(1);
-afficheMenu();
-afficheLogin();
-afficheFooter(1);
+            ToutboisDAO::insertCommande($_SESSION['panier'], $_SESSION['id']);
+            
+            unset($_SESSION['panier']);
+            
+            header("location:../Controlleur/panier.php");
+      
+        }
+        else
+        {
+            header("location:../Controlleur/index.php");
+        }
 ?>
 

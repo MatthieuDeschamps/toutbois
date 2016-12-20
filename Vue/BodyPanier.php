@@ -49,7 +49,7 @@ function afficheBodyPanier() {
                                     </tbody>
                                 <?php endforeach; ?>
                         </table>
-                        <input type="submit" class="btn btn-info " value="Recalculer">
+                        <input type="submit" class="btn btn-info" value="Recalculer">
                     </form>
                 </div>
             </div>
@@ -71,7 +71,7 @@ function afficheBodyPanier() {
                         <h4><?= number_format($_SESSION['panier']->totalCommandeTTC(), 2, ',', ' '); ?> €  </h4>
                     </div>
                 </div>
-                <button href="">Valider la commande</button>
+                <a href="validationCommande.php" ><button class="btn btn-success center-block">Valider la commande</button></a>
             </div>
         </section>
 

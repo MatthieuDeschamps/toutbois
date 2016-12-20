@@ -22,9 +22,6 @@ class ToutboisDAO {
         unset($mysqlPDO);
     }
 
-    public static function listeTables() {
-        
-    }
 
     public static function commandeEnCours() {
         $bdd = ToutboisDAO::connectionBDDToutbois();
@@ -88,7 +85,7 @@ class ToutboisDAO {
         ToutboisDAO::deconnectionBDD($bdd);
         return $donnees;
     }
-
+    // retourne une liste de produit correspondant à l'Id type_produit passé en paramêtre
     public static function get_produitByType($type) {
         $bdd = ToutboisDAO::connectionBDDToutbois();
         $statement = $bdd->prepare("SELECT codeProduit, libelleProduit, 
@@ -172,6 +169,31 @@ class ToutboisDAO {
          return $resultatRequete;
         
     }
+    //prend en paramêtre un objet de type panier et le numéro de client puis entre la commande dans la base de données
+    public static function insertCommande($panier,$numeroClient) {
+        $bdd = ToutboisDAO::connectionBDDToutbois();
+        $statement = $bdd->prepare("INSERT INTO commandes (dateCommande, numeroClient, id_EtatCommande)"
+                . " VALUES (NOW(), :numeroClient, 1)");
+        
+        $statement->bindParam(':numeroClient',$numeroClient);
+        //$statement->bindParam(':idEtatCommande',2);
+        $statement->execute();
+        
+        $idcommande=$bdd->lastInsertId();
+        
+        foreach ($panier->getLigneDeCommande() as $ligneDeCommande){
+        $statement = $bdd->prepare("INSERT INTO contenir (quantite, id_commande_contenir, codeProduit_contenir)"
+                . " VALUES (:quantite, :id_commande_contenir, :codeProduit_contenir)");
+        $statement->bindParam(':quantite',$ligneDeCommande->getQuantite());
+        $statement->bindParam(':id_commande_contenir',$idcommande);
+        $statement->bindParam(':codeProduit_contenir',$ligneDeCommande->getProduit()->getCodeProduit());
+        $statement->execute();
+        }
+        
+         ToutboisDAO::deconnectionBDD($bdd);      
+    }
+    
+    
 
     public static function updateProduit($produit) {
         $bdd = ToutboisDAO::connectionBDDToutbois();
@@ -185,7 +207,7 @@ class ToutboisDAO {
             id_TVA = :id_TVA,
             Id_typeProduit = :Id_typeProduit  
             WHERE codeProduit = :codeProduit");
-
+        
         $statement->bindParam(':libelleProduit', $produit->getLibelleProduit());
         $statement->bindParam(':stockProduit', $produit->getStock());
         $statement->bindParam(':prixUnitaireProduit', $produit->getPrixProduit());
@@ -195,12 +217,9 @@ class ToutboisDAO {
         $statement->bindParam(':id_TVA', $produit->getTVAProduit());
         $statement->bindParam(':Id_typeProduit', $produit->getTypeProduit());
         $statement->bindParam(':codeProduit', $produit->getCodeProduit());
-
-
+        
         $statement->execute();
-
-
-
+        
         ToutboisDAO::deconnectionBDD($bdd);
     }
 
