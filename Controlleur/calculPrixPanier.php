@@ -9,7 +9,7 @@
 
             for ($i=0;$i<count($_SESSION['panier']->getLigneDeCommande());$i++){
                 
-                $quantite=$_POST[$_SESSION['panier']->getLigneDeCommande()[$i]->getProduit()->getCodeProduit()];
+                $quantite=  abs((int)$_POST[$_SESSION['panier']->getLigneDeCommande()[$i]->getProduit()->getCodeProduit()]);
                 $_SESSION['panier']->getLigneDeCommande()[$i]->setQuantite($quantite);
             }
             

@@ -8,9 +8,9 @@
             $produit = new Produit;
             $produit->setCodeProduit((int) $_GET['id']);
             $produit->setLibelleProduit(htmlspecialchars($_POST['libelleProduit']));
-            $produit->setStock((int) $_POST['stockProduit']);
-            $produit->setPrixProduit((float) $_POST['prixProduit']);
-            $produit->setRemiseProduit((float) $_POST['remiseProduit']);
+            $produit->setStock(abs((int) $_POST['stockProduit']));
+            $produit->setPrixProduit(abs((float) $_POST['prixProduit']));
+            $produit->setRemiseProduit(abs((float) $_POST['remiseProduit']));
             $produit->setDescriptionProduit(htmlspecialchars($_POST['descriptionProduit']));
             $produit->setLienImageProduit(htmlspecialchars($_POST['lienImageProduit']));
             $produit->setTVAProduit((int) $_POST['tvaProduit']);

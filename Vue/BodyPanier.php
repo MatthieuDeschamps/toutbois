@@ -71,7 +71,9 @@ function afficheBodyPanier() {
                         <h4><?= number_format($_SESSION['panier']->totalCommandeTTC(), 2, ',', ' '); ?> €  </h4>
                     </div>
                 </div>
+               <?php if($_SESSION){ ?>
                 <a href="validationCommande.php" ><button class="btn btn-success center-block">Valider la commande</button></a>
+            <?php } ?>
             </div>
         </section>
 

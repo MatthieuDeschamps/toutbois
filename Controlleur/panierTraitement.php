@@ -29,7 +29,7 @@ if (isset($_SESSION['id'])) {
 
     $ligneCommande = new LigneCommande;
     $ligneCommande->setProduit($produitLigneCommande);
-    $ligneCommande->setQuantite($_POST['nbrProduit']);
+    $ligneCommande->setQuantite(abs((int)$_POST['nbrProduit']));
 
 
     if (!isset($_SESSION['panier'])) {
