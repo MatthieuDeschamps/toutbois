@@ -100,6 +100,10 @@ class Produit{
     {
         return $this->typeProduit;
     }
+    
+    public function __toString() {
+        return $this->codeProduit;
+    }
 }
 
 ?>

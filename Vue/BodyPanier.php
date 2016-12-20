@@ -15,7 +15,7 @@ function afficheBodyPanier() {
                     </div>
                 </div>
                 <div class="row">
-                    <form method="post" action="panier.php">
+                    <form method="post" action="calculPrixPanier.php">
                         <table class="table">
                             <thead>
                                 <tr text-align="center">
@@ -39,22 +39,17 @@ function afficheBodyPanier() {
                                         <th><img src="<?= '../' . $product->getProduit()->getLienImageProduit(); ?>" class="img-responsive img-panier"></th>
                                         <th><?= number_format($product->getProduit()->getPrixProduit(), 2, ',', ' '); ?> €</th>                                                                   
                                         <th> 
-                                <form method="post" action="../Controlleur/panierTraitement.php">
-                                    <input type="number" name="panier[quantity][<?= $product->getQuantite(); ?>]" value="<?= $product->getQuantite(); ?>">
-                                </form></th>
-                                    <th><?= number_format($product->calculerPrixTTC(), 2, ',', ' '); ?> €</th>
-                                    <th>                                        
-                                        <a href="../Controlleur/panier.php?del=<?= $product->getProduit()->getCodeProduit(); ?>" class="btn btn-danger glyphicon glyphicon-trash" aria-label="Panier" aria-hidden="true"></a>
-                                                                    
-
-                                        <!--<button  type="submit" class="btn btn-danger" aria-label="Panier"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                                        -->
-                                        <button type="submit" class="btn btn-success" aria-label="Panier"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </th>
+                                            <input type="number" name="<?= $product->getProduit()->getCodeProduit(); ?>" value="<?= $product->getQuantite(); ?>">
+                                        </th>
+                                        <th><?= number_format($product->calculerPrixTTC(), 2, ',', ' '); ?> €</th>
+                                        <th>                                        
+                                            <a href="../Controlleur/panier.php?del=<?= $product->getProduit()->getCodeProduit(); ?>" class="btn btn-danger glyphicon glyphicon-trash" aria-label="Panier" aria-hidden="true"></a>
+                                        </th>
                                     </tr>
                                     </tbody>
                                 <?php endforeach; ?>
                         </table>
+                        <input type="submit" class="btn btn-info " value="Recalculer">
                     </form>
                 </div>
             </div>
@@ -63,13 +58,6 @@ function afficheBodyPanier() {
         <section id = "totalPanier">
             <div class="container">
                 <div class="row">
-                    <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <input type="submit" class="btn btn-info " value="Calculer">
-                        <input type="submit" class="btn btn-success " value=" Valider ">
-                    </div>
-                </div>
-
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <h3>Total commande HT: </h3>
                         <h4>Total TVA: </h4>
@@ -82,14 +70,8 @@ function afficheBodyPanier() {
                         <h4><?= number_format($_SESSION['panier']->totalTVA(), 2, ',', ' '); ?> €  </h4>
                         <h4><?= number_format($_SESSION['panier']->totalCommandeTTC(), 2, ',', ' '); ?> €  </h4>
                     </div>
-
-
                 </div>
-
-                
-
-
-
+                <button href="">Valider la commande</button>
             </div>
         </section>
 
